@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
-    public function index () {
-        return view('listings/index', [
-        'heading' => 'Latest Listings',
-        'listings' => Listing::latest()->filter(request(['tags']))->get()
+    public function index() {
+        return view('listings.index', [
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);
     }
 
